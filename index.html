@@ -5,28 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professor Dr. Gajendra Agrawal | Cardiology Expert</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; }
-        header { padding: 50px 0; background-color: #f4f4f4; border-radius: 10px; margin-bottom: 30px; }
-        h1 { color: #004a99; margin: 0; }
-        .tagline { font-size: 1.2rem; color: #666; }
-        .cta-box { background: #e7f3ff; padding: 30px; border-radius: 10px; border: 1px solid #b2d7ff; }
-        .btn { background: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 20px; }
+        :root {
+            --primary-blue: #004a99;
+            --medical-green: #28a745;
+            --light-bg: #f8f9fa;
+        }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 0;
+            background-color: #fff;
+        }
+        header { 
+            padding: 60px 20px; 
+            background: linear-gradient(135deg, var(--primary-blue), #002d5e); 
+            color: white;
+            text-align: center;
+        }
+        h1 { margin: 0; font-size: 2.2rem; letter-spacing: 0.5px; }
+        .tagline { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
+        
+        .container { padding: 40px 20px; }
+        
+        .about-section { margin-bottom: 40px; text-align: center; }
+        
+        .portal-card { 
+            background: var(--light-bg); 
+            padding: 40px; 
+            border-radius: 15px; 
+            border: 1px solid #e1e4e8; 
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .step { flex: 1; padding: 10px; }
+        .step-num { 
+            display: block; 
+            color: var(--primary-blue); 
+            font-weight: bold; 
+            font-size: 1.2rem; 
+            margin-bottom: 5px;
+        }
+
+        .btn-portal { 
+            background: var(--medical-green); 
+            color: white; 
+            padding: 20px 40px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            display: inline-block; 
+            font-size: 1.25rem; 
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn-portal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            background: #218838;
+        }
+
+        footer { 
+            margin-top: 60px; 
+            padding: 30px; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: #888;
+            border-top: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Professor Dr. Gajendra Agrawal</h1>
-        <p class="tagline">Senior Cardiologist & Director, Orbit Multispeciality Hospital</p>
+        <p class="tagline">Senior Consultant Cardiologist & Director</p>
     </header>
 
-    <div class="cta-box">
-        <h2>Global Second Opinion Portal</h2>
-        <p>Expert review of Angiograms, Echo, and clinical reports for patients in India, Middle East, and Africa.</p>
-        <a href="mailto:your-email@example.com" class="btn">Inquire for Second Opinion</a>
+    <div class="container">
+        <section class="about-section">
+            <h2 style="color: var(--primary-blue);">Expert Cardiology Second Opinion</h2>
+            <p style="font-size: 1.1rem; color: #555;">
+                Providing specialized review of Angiograms, Echocardiograms, and complex clinical history for patients worldwide. 
+                Get clarity on your cardiac diagnosis from 21+ years of clinical excellence.
+            </p>
+        </section>
+
+        <section class="portal-card">
+            <h2 style="margin-top: 0;">Secure Clinical Portal</h2>
+            <p>To begin your consultation, please submit your records via our encrypted gateway.</p>
+            
+            <div class="process-steps">
+                <div class="step"><span class="step-num">1</span> Upload Reports</div>
+                <div class="step"><span class="step-num">2</span> Case Review</div>
+                <div class="step"><span class="step-num">3</span> Detailed Opinion</div>
+            </div>
+
+            <!-- REPLACE THE LINK BELOW WITH YOUR GOOGLE FORM LINK -->
+            <a href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="btn-portal">
+                Open Secure Intake Form →
+            </a>
+
+            <p style="margin-top: 25px; font-size: 0.8rem; color: #999;">
+                <span style="color: #28a745;">✔</span> SSL Secured Data Transfer | GDPR Compliant 
+            </p>
+        </section>
     </div>
 
-    <p style="margin-top: 50px; font-size: 0.9rem; color: #999;">
-        © 2026 Professor Dr. Gajendra Agrawal. All rights reserved.
-    </p>
+    <footer>
+        <p><strong>Orbit Multispeciality Hospital</strong><br>
+        Nagpur, Maharashtra, India</p>
+        <p>© 2026 Professor Dr. Gajendra Agrawal. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
