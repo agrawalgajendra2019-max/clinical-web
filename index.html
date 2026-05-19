@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Professor Dr. Gajendra Agrawal | Pristine Heart Care Clinic</title>
 
     <style>
@@ -108,6 +107,7 @@
             padding: 25px;
             border-radius: 12px;
             text-align: center;
+            transition: transform 0.2s;
             border-top: 4px solid #004a99;
         }
 
@@ -161,41 +161,6 @@
             font-weight: bold;
         }
 
-        /* WhatsApp Floating Button */
-
-        .whatsapp-float {
-
-            position: fixed;
-
-            width: 65px;
-            height: 65px;
-
-            bottom: 25px;
-            right: 25px;
-
-            background: #25D366;
-
-            color: white;
-
-            border-radius: 50%;
-
-            text-align: center;
-
-            font-size: 34px;
-            line-height: 65px;
-
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-
-            z-index: 99999;
-
-            text-decoration: none;
-
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.08);
-        }
-
         @media (max-width: 768px) {
 
             body {
@@ -231,13 +196,45 @@
                 width: 140px !important;
                 height: 140px !important;
             }
+        }
 
-            .whatsapp-float {
-                width: 58px;
-                height: 58px;
-                line-height: 58px;
-                font-size: 30px;
-            }
+        /* WhatsApp Floating Button */
+
+        .whatsapp-float {
+
+            position: fixed;
+
+            width: 65px;
+            height: 65px;
+
+            bottom: 25px;
+            right: 25px;
+
+            background-color: #25D366;
+
+            color: white;
+
+            border-radius: 50%;
+
+            text-align: center;
+
+            font-size: 34px;
+            line-height: 65px;
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+            z-index: 99999;
+
+            text-decoration: none;
+
+            display: block;
+
+        }
+
+        .whatsapp-float:hover {
+
+            transform: scale(1.08);
+
         }
 
     </style>
@@ -254,7 +251,6 @@
     <h1>Professor Dr. Gajendra Agrawal</h1>
 
     <p class="tagline">
-        MD Medicine • DNB Cardiology • FESC • LLB<br>
         Director & Senior Consultant Cardiologist | 21+ Years Experience
     </p>
 
@@ -276,17 +272,74 @@
 
         <div class="step">
             <span class="step-num">01. Submit History</span>
-            <p>Upload clinical history, angiography, echocardiography reports, and related medical records securely.</p>
+            <p>Upload clinical history, Angiogram, and Echo reports via our secure portal.</p>
         </div>
 
         <div class="step">
-            <span class="step-num">02. Review & Coordination</span>
-            <p>Your submitted records are reviewed and consultation/payment workflow is coordinated appropriately.</p>
+            <span class="step-num">02. Review & Fee</span>
+            <p>Select your fee bracket below. Payments are processed via Pristine Heart Care Clinic.</p>
         </div>
 
         <div class="step">
-            <span class="step-num">03. Expert Opinion</span>
-            <p>Receive specialist cardiology guidance and structured second-opinion consultation.</p>
+            <span class="step-num">03. Expert Report</span>
+            <p>Receive a detailed second opinion report and consultation within 24-48 hours.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="section" style="background: #fdfdfd; border-top: 4px solid #28a745;">
+
+    <h2>Consultation Fees & Secure Payment</h2>
+
+    <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">
+        Secure payment gateway provided by <strong>Razorpay</strong>. Billing will appear as "Pristine Heart Care Clinic".
+    </p>
+
+    <div class="payment-container">
+
+        <div class="pay-card" style="border-top-color: #28a745;">
+
+            <h3 style="color: #28a745;">🇮🇳 Patients in India</h3>
+
+            <p style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">
+                ₹ [Insert INR Amount]
+            </p>
+
+            <p style="font-size: 0.8rem; color: #777;">
+                UPI, Debit/Credit Cards, & Netbanking
+            </p>
+
+            <a href="https://rzp.io/rzp/6LrY1hCB"
+               class="btn-pay"
+               style="background:#28a745;">
+
+               Pay Securely (INR)
+
+            </a>
+
+        </div>
+
+        <div class="pay-card">
+
+            <h3>🌍 International Patients</h3>
+
+            <p style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">
+                $ [Insert USD Amount]
+            </p>
+
+            <p style="font-size: 0.8rem; color: #777;">
+                Secure International Credit/Debit Cards
+            </p>
+
+            <a href="YOUR_RAZORPAY_USD_LINK"
+               class="btn-pay">
+
+               Pay Securely (USD)
+
+            </a>
+
         </div>
 
     </div>
@@ -301,18 +354,25 @@
         Securely submit your medical history and cardiac reports for expert review and second-opinion guidance.
     </p>
 
-    <a href="consultation.html" class="btn">
-        Begin Secure Cardiology Consultation
+    <a href="consultation.html"
+       class="btn">
+
+       Begin Secure Cardiology Consultation
+
     </a>
 
     <div style="margin-top:20px; font-size:0.9rem; opacity:0.9;">
+
         ✔ Confidential Medical Review &nbsp;&nbsp;
         ✔ 24–48 Hour Response &nbsp;&nbsp;
         ✔ Secure Report Handling
+
     </div>
 
     <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.85;">
+
         🔒 Your medical records are handled confidentially using secure encrypted transfer systems.
+
     </p>
 
 </div>
@@ -323,28 +383,37 @@
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
 
-        <div>
+        <div class="cred-item">
+
             <strong>Pristine Heart Care Clinic</strong>
+
             <p style="font-size: 0.9rem; color: #555;">
                 Private Consultation & Advanced Diagnostics<br>
                 Nagpur, Maharashtra
             </p>
+
         </div>
 
-        <div>
+        <div class="cred-item">
+
             <strong>Orbit Multispeciality Hospital</strong>
+
             <p style="font-size: 0.9rem; color: #555;">
                 Director & Senior Consultant<br>
                 Tertiary Cardiac Care
             </p>
+
         </div>
 
-        <div>
+        <div class="cred-item">
+
             <strong>Academic Tenure</strong>
+
             <p style="font-size: 0.9rem; color: #555;">
                 Professor of Cardiology<br>
-                DMIHER
+                Datta Meghe Institute (DMIHER)
             </p>
+
         </div>
 
     </div>
@@ -386,6 +455,8 @@
     </p>
 
 </footer>
+
+<!-- WhatsApp Floating Button -->
 
 <a href="https://wa.me/917038928988?text=Hello%20Doctor,%20I%20would%20like%20to%20request%20an%20online%20cardiology%20consultation%20and%20second%20opinion."
    class="whatsapp-float"
