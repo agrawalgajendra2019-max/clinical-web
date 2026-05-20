@@ -327,9 +327,10 @@
         <div class="pay-card" style="border-top-color: #007bff;">
             <h3 style="color: #007bff;">🌐 International Patients</h3>
             <p>$ 100 USD</p>
-            <!-- Directs the patient to your secure backend routing gateway -->
-            <a href="checkout-usd.php" class="btn-pay" style="background:#007bff;">Pay Securely (USD)</a>
+            <!-- Triggers the secure overlay popup directly on your domain -->
+            <a href="#" onclick="payInternationalUSD(event)" class="btn-pay" style="background:#007bff;">Pay Securely (USD)</a>
         </div>
+        
 
     </div>
 
@@ -455,5 +456,43 @@
 
 </a>
 
+<!-- Load the official Razorpay Checkout library -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+function payInternationalUSD(event) {
+    event.preventDefault(); // Prevent page from jumping
+
+    var options = {
+        "key": "YOUR_RAZORPAY_KEY_ID", // Paste your live Razorpay Key ID here
+        "amount": "10000", // $100.00 USD (expressed in cents: 100 * 100)
+        "currency": "USD",
+        "name": "Pristine Heart Care Clinic",
+        "description": "International Cardiology Review - Prof. Dr. Agrawal",
+        "image": "https://professoragrawal.com/favicon.ico", // Displays your clinic icon
+        "handler": function (response){
+            // Fires instantly when payment succeeds
+            alert("Payment successful! Transaction ID: " + response.razorpay_payment_id);
+            window.location.href = "https://professoragrawal.com"; // Smoothly routes them back
+        },
+        "prefill": {
+            "name": "", // Left blank for the patient to complete
+            "email": "",
+            "contact": ""
+        },
+        "theme": {
+            "color": "#007bff" // Professional blue accent matching international standard
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+    
+    rzp1.on('payment.failed', function (response){
+        alert("Transaction declined: " + response.error.description);
+    });
+
+    rzp1.open();
+}
+</script>
 </body>
 </html>
