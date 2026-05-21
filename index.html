@@ -376,5 +376,64 @@
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/917038928988" class="whatsapp-float" target="_blank">💬</a>
 
+    
+<div class="section" style="background: #ffffff; border-top: 4px solid var(--primary-color);">
+    <h2>Patient Experiences & Testimonials</h2>
+    <p style="color: var(--text-light); margin-bottom: 30px; font-size: 0.95rem;">
+        Real feedback from patients who received clinical guidance, interventional second opinions, and cardiac care management.
+    </p>
+
+    <div id="live-reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+        <p id="loading-reviews" style="color: var(--text-light); font-style: italic; text-align: center; grid-column: 1/-1;">Loading patient testimonials...</p>
+    </div>
+</div>
+
+<script>
+// Automatically fetch approved reviews from your Google Sheet web deployment
+async function fetchLiveReviews() {
+    // URL pointing to a simple Google Apps Script web app (We can generate this link next)
+    const webAppUrl = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL"; 
+    
+    try {
+        const response = await fetch(webAppUrl);
+        const reviews = await response.json();
+        const grid = document.getElementById('live-reviews-grid');
+        const loadingText = document.getElementById('loading-reviews');
+        
+        if (reviews.length > 0) {
+            loadingText.style.display = 'none';
+            reviews.forEach(review => {
+                const card = document.createElement('div');
+                card.style = "background: #fafbfc; border: 1px solid #eef2f5; padding: 25px; border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between;";
+                
+                // Generate star string based on their score
+                const stars = "★".repeat(parseInt(review.rating || 5)) + "☆".repeat(5 - parseInt(review.rating || 5));
+                
+                card.innerHTML = `
+                    <div>
+                        <div style="color: #ffc107; font-size: 1.1rem; margin-bottom: 10px;">${stars}</div>
+                        <p style="font-style: italic; color: var(--text-dark); font-size: 0.95rem; margin-top: 0; line-height: 1.6;">"${review.text}"</p>
+                    </div>
+                    <div style="margin-top: 15px; border-top: 1px solid #edf2f7; padding-top: 12px;">
+                        <strong style="color: var(--primary-dark); font-size: 0.9rem; display: block;">${review.name}</strong>
+                        <span style="font-size: 0.8rem; color: var(--text-light);">${review.location}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        } else {
+            loadingText.innerText = "No clinical testimonials published at this time.";
+        }
+    } catch (error) {
+        // Fallback gracefully if Google services are momentarily delayed
+        document.getElementById('loading-reviews').style.display = 'none';
+        console.error("Review synchronization paused.");
+    }
+}
+
+// Launch fetch sequence on page load
+window.addEventListener('DOMContentLoaded', fetchLiveReviews);
+</script>
+    
 </body>
 </html>
