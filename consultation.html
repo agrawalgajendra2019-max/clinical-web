@@ -1,32 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Online Cardiology Consultation | Pristine Heart Care Clinic</title>
-
     <style>
+        :root {
+            --primary-color: #004a99;
+            --primary-dark: #002d5f;
+            --secondary-color: #28a745;
+            --text-dark: #2c3e50;
+            --text-light: #5a6c7d;
+            --bg-global: #f4f7f9;
+        }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #2c3e50;
-            max-width: 1000px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.65;
+            color: var(--text-dark);
+            max-width: 940px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f7fafe;
+            padding: 30px 20px;
+            background-color: var(--bg-global);
         }
 
         header {
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #004a99 0%, #002d5f 100%);
+            padding: 50px 30px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: white;
-            border-radius: 15px;
-            margin-bottom: 35px;
+            border-radius: 20px;
+            margin-bottom: 40px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,74,153,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         header img {
@@ -36,375 +51,275 @@
             border-radius: 50%;
             border: 4px solid rgba(255,255,255,0.3);
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
 
         h1 {
             margin: 0;
             font-size: 2.3rem;
+            letter-spacing: -0.5px;
+            font-weight: 700;
         }
 
         .tagline {
-            font-size: 1.1rem;
-            opacity: 0.92;
+            font-size: 1.15rem;
+            opacity: 0.95;
             margin-top: 15px;
+            font-weight: 300;
         }
 
         .clinic-tag {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.15);
             display: inline-block;
-            padding: 6px 18px;
-            border-radius: 20px;
+            padding: 6px 20px;
+            border-radius: 30px;
             margin-top: 20px;
             font-size: 0.95rem;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
         }
 
         .section {
             background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border: 1px solid #e9eef5;
+            padding: 45px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            margin-bottom: 35px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         h2 {
-            color: #004a99;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            border-bottom: 2px solid #edf4fc;
+            padding-bottom: 12px;
             margin-top: 0;
-            border-bottom: 2px solid #e7f3ff;
-            padding-bottom: 10px;
+            margin-bottom: 25px;
+            letter-spacing: -0.3px;
         }
 
         h3 {
-            color: #004a99;
+            color: var(--primary-color);
+            margin-top: 0;
             margin-bottom: 10px;
+            font-size: 1.25rem;
         }
 
         .trust-bar {
             margin-top: 20px;
             margin-bottom: 25px;
-            font-size: 0.95rem;
-            color: #444;
-            line-height: 1.8;
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.9;
+            font-weight: 500;
         }
 
         .highlight-box {
-            background: #f8fbff;
-            border-left: 4px solid #004a99;
-            padding: 20px;
-            border-radius: 10px;
+            background: #f8faff;
+            border-left: 4px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 12px;
             margin-top: 25px;
+            box-shadow: inset 0 0 10px rgba(0,74,153,0.01);
         }
 
         .cta-button {
-            background: #28a745;
+            background: var(--secondary-color);
             color: white;
-            padding: 18px 40px;
+            padding: 18px 45px;
             border-radius: 50px;
             text-decoration: none;
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 700;
             display: inline-block;
-            box-shadow: 0 4px 15px rgba(40,167,69,0.3);
-            transition: transform 0.2s;
+            box-shadow: 0 6px 20px rgba(40,167,69,0.3);
+            transition: all 0.3s ease;
+            letter-spacing: -0.2px;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40,167,69,0.4);
         }
 
         .faq-item {
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         hr {
             border: none;
-            border-top: 1px solid #e5e5e5;
+            border-top: 1px solid #eef2f5;
             margin: 25px 0;
         }
 
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding: 30px;
-            color: #777;
+            margin-top: 50px;
+            padding: 40px 20px;
+            color: var(--text-light);
             font-size: 0.9rem;
-            border-top: 1px solid #dce6f2;
+            border-top: 1px solid #eef2f5;
         }
 
         .legal-links a {
-            color: #004a99;
+            color: var(--primary-color);
             text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
+            margin: 0 12px;
+            font-weight: 600;
+        }
+
+        .legal-links a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-
-            body {
-                padding: 12px;
-            }
-
-            header {
-                padding: 35px 15px;
-            }
-
-            header img {
-                width: 120px;
-                height: 120px;
-            }
-
-            h1 {
-                font-size: 1.7rem;
-            }
-
-            .section {
-                padding: 22px;
-            }
-
-            .cta-button {
-                width: 100%;
-                box-sizing: border-box;
-                text-align: center;
-                padding: 16px;
-                font-size: 1.05rem;
-            }
-
+            body { padding: 15px 10px; }
+            header { padding: 45px 20px; margin-bottom: 30px; }
+            h1 { font-size: 1.8rem; }
+            .section { padding: 30px 20px; margin-bottom: 25px; }
+            .cta-button { width: 100%; padding: 16px; font-size: 1.1rem; box-sizing: border-box; text-align: center; }
         }
 
-    
-    .whatsapp-float {
-
-    position: fixed;
-    width: 65px;
-    height: 65px;
-
-    bottom: 25px;
-    right: 25px;
-
-    background-color: #25D366;
-    color: white;
-
-    border-radius: 50%;
-
-    text-align: center;
-
-    font-size: 32px;
-    line-height: 65px;
-
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-
-    z-index: 1000;
-
-    text-decoration: none;
-
-    transition: transform 0.2s ease;
-}
-
-.whatsapp-float:hover {
-
-    transform: scale(1.08);
-
-}
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            width: 60px !important;
+            height: 60px !important;
+            background: #25D366 !important;
+            color: white !important;
+            border-radius: 50% !important;
+            z-index: 999999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 30px !important;
+            text-decoration: none !important;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2) !important;
+            transition: transform 0.2s ease !important;
+        }
+        .whatsapp-float:hover { transform: scale(1.08); }
     </style>
 </head>
 
 <body>
 
 <header>
-
-    <img src="dr-gajendra-agrawal.jpg" alt="Professor Dr. Gajendra Agrawal">
-
+    <img src="profile.jpg.png" alt="Professor Dr. Gajendra Agrawal">
     <h1>Online Cardiology Consultation & Second Opinion</h1>
-
-    <p class="tagline">
-        Expert review for angioplasty, bypass surgery, heart failure, preventive cardiology, rhythm disorders, and complex cardiac conditions.
-    </p>
-
-    <div class="clinic-tag">
-        Pristine Heart Care Clinic | Nagpur, India
-    </div>
-
+    <p class="tagline">Expert review for angioplasty, bypass surgery, heart failure, preventive cardiology, rhythm disorders, and complex cardiac conditions.</p>
+    <div class="clinic-tag">Pristine Heart Care Clinic | Nagpur, India</div>
 </header>
 
 <div class="section">
-
     <h2>About the Consultation</h2>
-
-    <p>
+    <p style="color: #4a5568; font-size: 1.05rem;">
         Professor Dr. Gajendra Agrawal provides expert cardiology consultation and second-opinion services for patients seeking guidance regarding angioplasty, bypass surgery, heart failure, preventive cardiology, rhythm disorders, and related cardiac conditions.
     </p>
 
     <div class="highlight-box">
-
-        <strong>MD Medicine • DNB Cardiology</strong><br>
-        Professor of Cardiology | DMIHER<br>
-        Director & Senior Consultant Cardiologist<br>
-        21+ Years Clinical Experience
-
+        <strong style="color: var(--primary-dark); font-size: 1.1rem;">MD Medicine • DNB Cardiology</strong><br>
+        <span style="color: var(--text-dark); font-weight: 500;">
+            Professor of Cardiology | DMIHER<br>
+            Director & Senior Consultant Cardiologist<br>
+            21+ Years Clinical Experience
+        </span>
     </div>
 
     <div class="trust-bar">
-
         ✔ Confidential Medical Review<br>
         ✔ Secure Report Handling<br>
         ✔ 24–48 Hour Initial Response<br>
         ✔ Structured Online Cardiology Evaluation
-
     </div>
 
-    <p style="font-size:0.95rem; color:#555;">
+    <p style="font-size:0.95rem; color: var(--text-light); margin-bottom: 0;">
         This platform is intended for non-emergency online cardiology consultation and second-opinion evaluation only.
         If you are experiencing severe chest pain, collapse, or acute breathlessness, please seek immediate emergency medical care.
     </p>
-
 </div>
 
 <div class="section">
-
     <h2>Secure Consultation Request</h2>
-
-    <p>
+    <p style="color: #4a5568;">
         Please complete the secure cardiology consultation form and upload any relevant medical records available with you.
     </p>
 
     <div class="trust-bar">
-
         ✔ Secure Medical Information Transfer<br>
         ✔ Confidential Clinical Review Workflow<br>
         ✔ Structured Cardiology Intake Process
-
     </div>
 
     <div style="text-align:center; margin-top:35px;">
-
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSenVnICShsnZaO4U3iAMo0-0LqKaotdrco98PSbEf22gag74Q/viewform?usp=header"
-           target="_blank"
-           class="cta-button">
-
-           Continue to Secure Consultation Form
-
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSclZlD7h5_O67DqD8-bZlR8V8Z9Vn-2mH42gK3no/viewform" target="_blank" class="cta-button">
+            Continue to Secure Consultation Form
         </a>
-
-        <p style="margin-top:20px; font-size:0.95rem; color:#666;">
-
+        <p style="margin-top:20px; font-size:0.95rem; color: var(--text-light); margin-bottom: 0;">
             You will be redirected to our secure medical information and cardiac report submission portal.
-
         </p>
-
     </div>
-
 </div>
 
 <div class="section">
-
     <h2>Frequently Asked Questions</h2>
 
     <div class="faq-item">
-
         <h3>What medical records should I upload?</h3>
-
-        <p>
-            Please upload any relevant cardiac reports available with you, such as angiography reports, echocardiography reports, ECGs, discharge summaries, blood investigations, prescriptions, or other related medical records.
-        </p>
-
+        <p style="color: #4a5568; margin: 0;">Please upload any relevant cardiac reports available with you, such as angiography reports, echocardiography reports, ECGs, discharge summaries, blood investigations, prescriptions, or other related medical records.</p>
     </div>
 
     <hr>
 
     <div class="faq-item">
-
         <h3>How long does the consultation review usually take?</h3>
-
-        <p>
-            Initial review and response are generally provided within approximately 24–48 hours after submission of records and consultation details.
-        </p>
-
+        <p style="color: #4a5568; margin: 0;">Initial review and response are generally provided within approximately 24–48 hours after submission of records and consultation details.</p>
     </div>
 
     <hr>
 
     <div class="faq-item">
-
         <h3>Is this an emergency medical service?</h3>
-
-        <p>
-            No. This platform is intended only for non-emergency online cardiology consultation and second-opinion guidance. Patients with severe chest pain, collapse, acute breathlessness, or other medical emergencies should seek immediate local emergency care.
-        </p>
-
+        <p style="color: #4a5568; margin: 0;">No. This platform is intended only for non-emergency online cardiology consultation and second-opinion guidance. Patients with severe chest pain, collapse, acute breathlessness, or other medical emergencies should seek immediate local emergency care.</p>
     </div>
 
     <hr>
 
     <div class="faq-item">
-
         <h3>Can international patients request consultation?</h3>
-
-        <p>
-            International patients may submit consultation requests and medical records for expert review and second-opinion guidance, subject to applicable operational and consultation limitations.
-        </p>
-
+        <p style="color: #4a5568; margin: 0;">International patients may submit consultation requests and medical records for expert review and second-opinion guidance, subject to applicable operational and consultation limitations.</p>
     </div>
 
     <hr>
 
     <div class="faq-item">
-
         <h3>How will the consultation opinion be shared?</h3>
-
-        <p>
-            Consultation guidance may be shared through written report review, email communication, WhatsApp coordination, or scheduled video consultation depending on the consultation type selected.
-        </p>
-
+        <p style="color: #4a5568; margin: 0;">Consultation guidance may be shared through written report review, email communication, WhatsApp coordination, or scheduled video consultation depending on the consultation type selected.</p>
     </div>
 
     <hr>
 
     <div class="faq-item">
-
         <h3>Are my medical records kept confidential?</h3>
-
-        <p>
-            Yes. Medical records and patient information are handled confidentially and used only for consultation and follow-up purposes within the clinical workflow.
-        </p>
-
+        <p style="color: #4a5568; margin: 0;">Yes. Medical records and patient information are handled confidentially and used only for consultation and follow-up purposes within the clinical workflow.</p>
     </div>
-
 </div>
 
 <footer>
-
     <div class="legal-links">
-
         <a href="terms.html">Terms & Conditions</a> |
         <a href="privacy.html">Privacy Policy</a> |
         <a href="refund.html">Refund Policy</a>
-
     </div>
-
-    <p style="margin-top:20px;">
-        <strong>Pristine Heart Care Clinic</strong><br>
-        Nagpur, Maharashtra, India
+    <p style="margin-top:25px; color: var(--text-dark);">
+        <strong>Pristine Heart Care Clinic</strong><br>Nagpur, Maharashtra, India
     </p>
-
-    <p>
-        <strong>Email:</strong> consult@professoragrawal.com
-    </p>
-
-    <p>
-        © 2026 Professor Dr. Gajendra Agrawal. All Rights Reserved.
-    </p>
-
+    <p style="margin-top: 5px;"><strong>Email:</strong> consult@professoragrawal.com</p>
+    <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">© 2026 Professor Dr. Gajendra Agrawal. All Rights Reserved.</p>
 </footer>
 
-<a href="https://wa.me/917038928988?text=Hello%20Doctor,%20I%20would%20like%20to%20request%20an%20online%20cardiology%20consultation%20and%20second%20opinion."
-   class="whatsapp-float"
-   target="_blank">
+<a href="https://wa.me/917038928988?text=Hello%20Doctor,%20I%20would%20like%20to%20request%20an%20online%20cardiology%20consultation%20and%20second%20opinion." class="whatsapp-float" target="_blank">💬</a>
 
-    💬
-
-</a>
 </body>
-
 </html>
