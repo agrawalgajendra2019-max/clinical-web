@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professor Dr. Gajendra Agrawal | Pristine Heart Care Clinic</title>
-
     <style>
         :root {
             --primary-color: #004a99;
@@ -307,7 +306,6 @@
     </p>
 
     <div class="payment-container">
-        <!-- Domestic Card Block -->
         <div class="pay-card" style="border-top-color: var(--secondary-color);">
             <h3 style="color: var(--secondary-color);">🇮🇳 Patients in India</h3>
             <p style="font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin: 15px 0;">₹ 2,500</p>
@@ -315,12 +313,11 @@
             <a href="https://rzp.io/rzp/6LrY1hCB" class="btn-pay" style="background: var(--secondary-color);">Pay Securely (INR)</a>
         </div>
 
-        <!-- International Card Block -->
         <div class="pay-card" style="border-top-color: #007bff;">
             <h3 style="color: #007bff;">🌐 International Patients</h3>
             <p style="font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin: 15px 0;">$ 100 USD</p>
-            <p style="font-size: 0.85rem; color: var(--text-light);">International Credit & Debit Cards</p>
-            <a href="#" onclick="alert('Our USD Payment Gateway is completing its formal routing verification over the next 24 hours. International patients may safely use the green button to pay via global cards, or reach out to us directly via WhatsApp.'); event.preventDefault();" class="btn-pay" style="background:#007bff;">Pay Securely (USD)</a>
+            <p style="font-size: 0.85rem; color: var(--text-light);">International Credit, Debit, & Corporate Cards</p>
+            <a href="https://rzp.io/rzp/3gXs8UtZ" class="btn-pay" style="background:#007bff;">Pay Securely (USD)</a>
         </div>
     </div>
 </div>
@@ -328,7 +325,7 @@
 <div class="cta-container">
     <h2>Begin Your Online Cardiology Consultation</h2>
     <p style="opacity: 0.9; margin-bottom: 25px;">Securely submit your medical history and cardiac reports for expert review and second-opinion guidance.</p>
-    <a href="consultation.html" class="btn">Begin Secure Consultation</a>
+    <a href="consult.html" class="btn">Begin Secure Consultation</a>
     <div style="margin-top:30px; font-size:0.95rem; opacity:0.95; font-weight: 500;">
         ✔ Confidential Medical Review &nbsp;&nbsp;&bull;&nbsp;&nbsp;
         ✔ 24–48 Hour Response &nbsp;&nbsp;&bull;&nbsp;&nbsp;
@@ -337,6 +334,16 @@
     <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.8;">
         🔒 Your medical records are handled confidentially using secure encrypted transfer systems.
     </p>
+</div>
+
+<div class="section">
+    <h2>Patient Experiences & Testimonials</h2>
+    <p style="color: var(--text-light); margin-bottom: 30px; font-size: 0.95rem;">
+        Real feedback from patients who received clinical guidance, interventional second opinions, and cardiac care management.
+    </p>
+    <div id="live-reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+        <p id="loading-reviews" style="color: var(--text-light); font-style: italic; text-align: center; grid-column: 1/-1;">Loading patient testimonials...</p>
+    </div>
 </div>
 
 <div class="section">
@@ -373,40 +380,22 @@
     <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">© 2026 Professor Dr. Gajendra Agrawal. All Rights Reserved.</p>
 </footer>
 
-<!-- WhatsApp Floating Button -->
 <a href="https://wa.me/917038928988" class="whatsapp-float" target="_blank">💬</a>
 
-    
-<div class="section" style="background: #ffffff; border-top: 4px solid var(--primary-color);">
-    <h2>Patient Experiences & Testimonials</h2>
-    <p style="color: var(--text-light); margin-bottom: 30px; font-size: 0.95rem;">
-        Real feedback from patients who received clinical guidance, interventional second opinions, and cardiac care management.
-    </p>
-
-    <div id="live-reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-        <p id="loading-reviews" style="color: var(--text-light); font-style: italic; text-align: center; grid-column: 1/-1;">Loading patient testimonials...</p>
-    </div>
-</div>
-
 <script>
-// Automatically fetch approved reviews from your Google Sheet web deployment
 async function fetchLiveReviews() {
-    // URL pointing to a simple Google Apps Script web app (We can generate this link next)
     const webAppUrl = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL"; 
-    
     try {
         const response = await fetch(webAppUrl);
         const reviews = await response.json();
         const grid = document.getElementById('live-reviews-grid');
         const loadingText = document.getElementById('loading-reviews');
         
-        if (reviews.length > 0) {
+        if (reviews && reviews.length > 0) {
             loadingText.style.display = 'none';
             reviews.forEach(review => {
                 const card = document.createElement('div');
-                card.style = "background: #fafbfc; border: 1px solid #eef2f5; padding: 25px; border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between;";
-                
-                // Generate star string based on their score
+                card.style = "background: #fafbfc; border: 1px solid #eef2f5; padding: 25px; border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 15px rgba(0,0,0,0.01);";
                 const stars = "★".repeat(parseInt(review.rating || 5)) + "☆".repeat(5 - parseInt(review.rating || 5));
                 
                 card.innerHTML = `
@@ -425,15 +414,11 @@ async function fetchLiveReviews() {
             loadingText.innerText = "No clinical testimonials published at this time.";
         }
     } catch (error) {
-        // Fallback gracefully if Google services are momentarily delayed
         document.getElementById('loading-reviews').style.display = 'none';
         console.error("Review synchronization paused.");
     }
 }
-
-// Launch fetch sequence on page load
 window.addEventListener('DOMContentLoaded', fetchLiveReviews);
 </script>
-    
 </body>
 </html>
