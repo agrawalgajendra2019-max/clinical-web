@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>International Cardiology Second Opinion | Dr. Gajendra Agrawal | Pristine Heart Care Clinic</title>
+
     <style>
         :root {
             --primary-color: #004a99;
@@ -12,6 +14,10 @@
             --text-dark: #2c3e50;
             --text-light: #5a6c7d;
             --bg-global: #f4f7f9;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -26,21 +32,32 @@
 
         header {
             padding: 70px 30px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(
+                135deg,
+                var(--primary-color) 0%,
+                var(--primary-dark) 100%
+            );
             color: white;
             border-radius: 20px;
             margin-bottom: 40px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,74,153,0.15);
+            box-shadow: 0 15px 35px rgba(0, 74, 153, 0.15);
             position: relative;
             overflow: hidden;
         }
 
         header::before {
-            content: '';
+            content: "";
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 0%, transparent 60%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at top right,
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 60%
+            );
             pointer-events: none;
         }
 
@@ -109,7 +126,7 @@
             padding: 25px;
             border-radius: 12px;
             border-left: 4px solid var(--primary-color);
-            box-shadow: inset 0 0 10px rgba(0,74,153,0.01);
+            box-shadow: inset 0 0 10px rgba(0, 74, 153, 0.01);
         }
 
         .step p {
@@ -143,12 +160,12 @@
             text-align: center;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             border-top: 4px solid var(--primary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
         }
 
         .pay-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
         }
 
         .btn-pay {
@@ -170,12 +187,16 @@
 
         .cta-container {
             text-align: center;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(
+                135deg,
+                var(--primary-color) 0%,
+                var(--primary-dark) 100%
+            );
             color: white;
             padding: 50px 40px;
             border-radius: 20px;
             margin-bottom: 35px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
         }
 
         .cta-container h2 {
@@ -193,7 +214,7 @@
             font-weight: 700;
             display: inline-block;
             font-size: 1.2rem;
-            box-shadow: 0 6px 20px rgba(40,167,69,0.3);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
             transition: all 0.3s ease;
             margin-top: 20px;
             letter-spacing: -0.2px;
@@ -201,7 +222,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(40,167,69,0.4);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
         }
 
         .cred-item {
@@ -238,17 +259,44 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
-            body { padding: 15px 10px; }
-            header { padding: 45px 20px; margin-bottom: 30px; }
-            h1 { font-size: 2rem; }
-            .section { padding: 30px 20px; margin-bottom: 25px; }
-            .btn { width: 100%; padding: 16px; font-size: 1.1rem; box-sizing: border-box; }
-            .process-grid, .payment-container { flex-direction: column; display: flex; gap: 15px; }
-            img { width: 130px !important; height: 130px !important; }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(280px, 1fr)
+            );
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: #fafbfc;
+            border: 1px solid #eef2f5;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-top: 0;
+        }
+
+        .testimonial-name {
+            display: block;
+            margin-top: 15px;
+            color: var(--primary-dark);
         }
 
         /* WhatsApp Floating Button */
+
         .whatsapp-float {
             position: fixed !important;
             bottom: 25px !important;
@@ -264,340 +312,653 @@
             justify-content: center !important;
             font-size: 30px !important;
             text-decoration: none !important;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
             transition: transform 0.2s ease !important;
         }
-        .whatsapp-float:hover { transform: scale(1.08); }
 
-        .service-chip{
-    display:inline-block;
-    background:rgba(255,255,255,0.12);
-    border:1px solid rgba(255,255,255,0.25);
-    border-radius:30px;
-    padding:10px 18px;
-    color:white;
-    font-size:1.05rem;
-    font-weight:500;
-    backdrop-filter:blur(6px);
-}
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+        }
+
+        .service-chip {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            padding: 10px 18px;
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 500;
+            backdrop-filter: blur(6px);
+        }
+
+        @media (max-width: 768px) {
+
+            body {
+                padding: 15px 10px;
+            }
+
+            header {
+                padding: 45px 20px;
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 30px 20px;
+                margin-bottom: 25px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 16px;
+                font-size: 1.1rem;
+                box-sizing: border-box;
+            }
+
+            .process-grid,
+            .payment-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            img {
+                width: 130px !important;
+                height: 130px !important;
+            }
+
+            .whatsapp-float {
+                bottom: 18px !important;
+                right: 18px !important;
+                width: 55px !important;
+                height: 55px !important;
+                font-size: 27px !important;
+            }
+        }
     </style>
 </head>
+
 <body>
 
 <header>
 
-<img src="profile.jpg.png"
-alt="Dr. Gajendra Agrawal"
-style="width:180px;
-height:180px;
-object-fit:cover;
-border-radius:50%;
-border:5px solid rgba(255,255,255,0.35);
-margin-bottom:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.25);">
+    <img
+        src="profile.jpg.png"
+        alt="Dr. Gajendra Agrawal"
+        style="
+            width:180px;
+            height:180px;
+            object-fit:cover;
+            border-radius:50%;
+            border:5px solid rgba(255,255,255,0.35);
+            margin-bottom:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.25);
+        "
+    >
 
-<h1 style="font-size:3.4rem;line-height:1.15;margin-bottom:15px;">
+    <h1
+        style="
+            font-size:3.4rem;
+            line-height:1.15;
+            margin-bottom:15px;
+        "
+    >
+        Expert Cardiology
+        <br>
+        Second Opinions
+    </h1>
 
-Expert Cardiology
-<br>
-Second Opinions
+    <p
+        style="
+            font-size:1.2rem;
+            font-weight:700;
+            color:#FFD700;
+            margin:18px 0 22px 0;
+        "
+    >
+        ⭐ Trusted by 94+ Google Reviews
+    </p>
 
-</h1>
+    <p
+        class="tagline"
+        style="
+            font-size:2rem;
+            font-weight:600;
+            max-width:850px;
+            margin:20px auto 25px auto;
+            line-height:1.4;
+            color:white;
+        "
+    >
+        Before Angioplasty, Bypass Surgery
+        <br>
+        or Any Major Heart Decision
+    </p>
 
-<p style="
-font-size:1.2rem;
-font-weight:700;
-color:#FFD700;
-margin:18px 0 22px 0;">
+    <p
+        style="
+            font-size:1.3rem;
+            font-weight:500;
+            margin-top:10px;
+            margin-bottom:35px;
+            color:white;
+        "
+    >
+        I provide independent expert reviews of:
+    </p>
 
-⭐ Trusted by 94+ Google Reviews
+    <div
+        style="
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            gap:12px;
+            max-width:900px;
+            margin:25px auto 45px auto;
+        "
+    >
 
-</p>
+        <span class="service-chip">✓ Angiography Review</span>
+        <span class="service-chip">✓ ECG Interpretation</span>
+        <span class="service-chip">✓ 2D Echo Review</span>
+        <span class="service-chip">✓ CT Coronary Angiography</span>
+        <span class="service-chip">✓ Angioplasty Advice</span>
+        <span class="service-chip">✓ Bypass Surgery Opinion</span>
+        <span class="service-chip">✓ Heart Failure</span>
+        <span class="service-chip">✓ Valve Disease</span>
 
-<p class="tagline"
-style="
-font-size:2rem;
-font-weight:600;
-max-width:850px;
-margin:20px auto 25px auto;
-line-height:1.4;
-color:white;">
+    </div>
 
-Before Angioplasty, Bypass Surgery
-<br>
-or Any Major Heart Decision
+    <div
+        style="
+            margin-top:35px;
+            font-size:18px;
+            line-height:2;
+        "
+    >
 
-</p>
+        ✅ 21+ Years Experience
+        &nbsp;&nbsp;&nbsp;
+        ✅ International Online Consultation
+        &nbsp;&nbsp;&nbsp;
+        ✅ 24–48 Hour Expert Review
 
-<p style="
-font-size:1.3rem;
-font-weight:500;
-margin-top:10px;
-margin-bottom:35px;
-color:white;">
+        <br>
 
-I provide independent expert reviews of:
+        ✅ Independent Treatment Advice
+        &nbsp;&nbsp;&nbsp;
+        ✅ 94+ Google Reviews
 
-</p>
+    </div>
 
-<div style="
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:12px;
-max-width:900px;
-margin:25px auto 45px auto;">
+    <div style="margin-top:35px;">
 
-<span class="service-chip">✓ Angiography Review</span>
+        <a
+            href="consultation.html"
+            style="
+                background:#28a745;
+                padding:18px 36px;
+                color:white;
+                text-decoration:none;
+                border-radius:50px;
+                font-size:20px;
+                font-weight:700;
+                margin-right:15px;
+                display:inline-block;
+            "
+        >
+            Start Secure Consultation
+        </a>
 
-<span class="service-chip">✓ ECG Interpretation</span>
+        <a
+            href="#payment"
+            style="
+                background:white;
+                padding:18px 36px;
+                color:#004a99;
+                text-decoration:none;
+                border-radius:50px;
+                font-size:20px;
+                font-weight:700;
+                display:inline-block;
+            "
+        >
+            View Consultation Fees
+        </a>
 
-<span class="service-chip">✓ 2D Echo Review</span>
+    </div>
 
-<span class="service-chip">✓ CT Coronary Angiography</span>
-
-<span class="service-chip">✓ Angioplasty Advice</span>
-
-<span class="service-chip">✓ Bypass Surgery Opinion</span>
-
-<span class="service-chip">✓ Heart Failure</span>
-
-<span class="service-chip">✓ Valve Disease</span>
-
-</div>
-<div style="margin-top:35px;font-size:18px;line-height:2;">
-
-✅ 21+ Years Experience
-
-&nbsp;&nbsp;&nbsp;
-
-✅ International Online Consultation
-
-&nbsp;&nbsp;&nbsp;
-
-✅ 24–48 Hour Expert Review
-
-<br>
-
-✅ Independent Treatment Advice
-
-&nbsp;&nbsp;&nbsp;
-
-✅ 94+ Google Reviews
-
-</div>
-
-<div style="margin-top:35px;">
-
-<a href="consultation.html"
-style="
-background:#28a745;
-padding:18px 36px;
-color:white;
-text-decoration:none;
-border-radius:50px;
-font-size:20px;
-font-weight:700;
-margin-right:15px;
-display:inline-block;">
-
-Start Secure Consultation
-
-</a>
-
-<a href="#payment"
-style="
-background:white;
-padding:18px 36px;
-color:#004a99;
-text-decoration:none;
-border-radius:50px;
-font-size:20px;
-font-weight:700;
-display:inline-block;">
-
-View Consultation Fees
-
-</a>
-
-</div>
-
-<div class="clinic-tag"
-style="margin-top:35px;">
-
-Pristine Heart Care Clinic
-
-<br>
-
-<strong>International Cardiology Second Opinion Centre</strong>
-
-</div>
+    <div
+        class="clinic-tag"
+        style="margin-top:35px;"
+    >
+        Pristine Heart Care Clinic
+        <br>
+        <strong>
+            International Cardiology Second Opinion Centre
+        </strong>
+    </div>
 
 </header>
 
+
+<!-- ========================= -->
+<!-- EXPERT SECOND OPINION -->
+<!-- ========================= -->
+
 <div class="section">
+
     <h2>Expert Cardiology Second Opinion</h2>
-    <p style="color: #4a5568; font-size: 1.05rem;">Professor Agrawal provides expert cardiology second-opinion consultations for patients seeking guidance regarding angioplasty, stenting, bypass surgery, heart failure, preventive cardiology, and related cardiac conditions.</p>
-    
+
+    <p
+        style="
+            color:#4a5568;
+            font-size:1.05rem;
+        "
+    >
+        Professor Agrawal provides expert cardiology second-opinion
+        consultations for patients seeking guidance regarding angioplasty,
+        stenting, bypass surgery, heart failure, preventive cardiology,
+        and related cardiac conditions.
+    </p>
+
     <div class="process-grid">
 
-    <div class="step">
-        <span class="step-num">01. Secure Payment</span>
-        <p>Choose your consultation fee and pay securely through Razorpay.</p>
+        <div class="step">
+
+            <span class="step-num">
+                01. Secure Payment
+            </span>
+
+            <p>
+                Choose your consultation fee and pay securely through Razorpay.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span class="step-num">
+                02. Submit Medical Information
+            </span>
+
+            <p>
+                Complete the secure consultation form and upload any cardiac
+                reports available with you.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <span class="step-num">
+                03. Receive Expert Review
+            </span>
+
+            <p>
+                Dr. Gajendra Agrawal personally reviews your case and provides
+                a second opinion within 24–48 hours.
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="step">
-        <span class="step-num">02. Submit Medical Information</span>
-        <p>Complete the secure consultation form and upload any cardiac reports available with you.</p>
-    </div>
-
-    <div class="step">
-        <span class="step-num">03. Receive Expert Review</span>
-        <p>Dr. Gajendra Agrawal personally reviews your case and provides a second opinion within 24–48 hours.</p>
-    </div>
-
-    </div>
 </div>
 
-<div id="payment" class="section" style="background: #fff; border-top: 4px solid var(--secondary-color);">
-    <h2>Consultation Fees & Secure Payment</h2>
-    <p style="font-size: 0.95rem; color: var(--text-light); margin-bottom: 25px;">
-        Secure payment gateway provided by <strong>Razorpay</strong>. Billing will appear as "Pristine Heart Care Clinic".
+
+<!-- ========================= -->
+<!-- PAYMENT -->
+<!-- ========================= -->
+
+<div
+    id="payment"
+    class="section"
+    style="
+        background:#fff;
+        border-top:4px solid var(--secondary-color);
+    "
+>
+
+    <h2>
+        Consultation Fees & Secure Payment
+    </h2>
+
+    <p
+        style="
+            font-size:0.95rem;
+            color:var(--text-light);
+            margin-bottom:25px;
+        "
+    >
+        Secure payment gateway provided by
+        <strong>Razorpay</strong>.
+        Billing will appear as
+        "Pristine Heart Care Clinic".
     </p>
 
     <div class="payment-container">
-        <div class="pay-card" style="border-top-color: var(--secondary-color);">
-            <h3 style="color: var(--secondary-color);">🇮🇳 Patients in India</h3>
-            <p style="font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin: 15px 0;">₹ 2,500</p>
-            <p style="font-size: 0.85rem; color: var(--text-light);">UPI, Debit/Credit Cards, & Netbanking</p>
-            <a href="https://rzp.io/rzp/6LrY1hCB" class="btn-pay" style="background: var(--secondary-color);">Pay Securely (INR)</a>
+
+        <!-- INDIA -->
+
+        <div
+            class="pay-card"
+            style="
+                border-top-color:var(--secondary-color);
+            "
+        >
+
+            <h3 style="color:var(--secondary-color);">
+                🇮🇳 Patients in India
+            </h3>
+
+            <p
+                style="
+                    font-size:1.8rem;
+                    font-weight:700;
+                    color:var(--text-dark);
+                    margin:15px 0;
+                "
+            >
+                ₹ 2,500
+            </p>
+
+            <p
+                style="
+                    font-size:0.85rem;
+                    color:var(--text-light);
+                "
+            >
+                UPI, Debit/Credit Cards, & Netbanking
+            </p>
+
+            <a
+                href="https://rzp.io/rzp/6LrY1hCB"
+                class="btn-pay"
+                style="
+                    background:var(--secondary-color);
+                "
+            >
+                Pay Securely (INR)
+            </a>
+
         </div>
 
-        <div class="pay-card" style="border-top-color: #007bff;">
-            <h3 style="color: #007bff;">🌐 International Patients</h3>
-            <p style="font-size: 1.8rem; font-weight: 700; color: var(--text-dark); margin: 15px 0;">$ 80 USD</p>
-            <p style="font-size: 0.85rem; color: var(--text-light);">International Credit, Debit, & Corporate Cards</p>
-            <a href="https://rzp.io/rzp/3gXs8UtZ"
-               class="btn-pay"
-               style="background:#007bff;">
-               Pay $80 Securely
+
+        <!-- INTERNATIONAL -->
+
+        <div
+            class="pay-card"
+            style="
+                border-top-color:#007bff;
+            "
+        >
+
+            <h3 style="color:#007bff;">
+                🌐 International Patients
+            </h3>
+
+            <p
+                style="
+                    font-size:1.8rem;
+                    font-weight:700;
+                    color:var(--text-dark);
+                    margin:15px 0;
+                "
+            >
+                $ 80 USD
+            </p>
+
+            <p
+                style="
+                    font-size:0.85rem;
+                    color:var(--text-light);
+                "
+            >
+                International Credit, Debit, & Corporate Cards
+            </p>
+
+            <a
+                href="https://rzp.io/rzp/3gXs8UtZ"
+                class="btn-pay"
+                style="background:#007bff;"
+            >
+                Pay $80 Securely
             </a>
+
         </div>
+
     </div>
+
 </div>
+
+
+<!-- ========================= -->
+<!-- CONSULTATION CTA -->
+<!-- ========================= -->
 
 <div class="cta-container">
-    <h2>Begin Your Online Cardiology Consultation</h2>
-    <p style="opacity: 0.9; margin-bottom: 25px;">Securely submit your medical history and cardiac reports for expert review and second-opinion guidance.</p>
-    <a href="consultation.html" class="btn">Begin Secure Consultation</a>
-    <div style="margin-top:30px; font-size:0.95rem; opacity:0.95; font-weight: 500;">
-        ✔ Confidential Medical Review &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-        ✔ 24–48 Hour Response &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+
+    <h2>
+        Begin Your Online Cardiology Consultation
+    </h2>
+
+    <p
+        style="
+            opacity:0.9;
+            margin-bottom:25px;
+        "
+    >
+        Securely submit your medical history and cardiac reports
+        for expert review and second-opinion guidance.
+    </p>
+
+    <a
+        href="consultation.html"
+        class="btn"
+    >
+        Begin Secure Consultation
+    </a>
+
+    <div
+        style="
+            margin-top:30px;
+            font-size:0.95rem;
+            opacity:0.95;
+            font-weight:500;
+        "
+    >
+        ✔ Confidential Medical Review
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        ✔ 24–48 Hour Response
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
         ✔ Secure Report Handling
     </div>
-    <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.8;">
-        🔒 Your medical records are handled confidentially using secure encrypted transfer systems.
+
+    <p
+        style="
+            margin-top:25px;
+            font-size:0.85rem;
+            opacity:0.8;
+        "
+    >
+        🔒 Your medical records are handled confidentially
+        using secure encrypted transfer systems.
     </p>
+
 </div>
 
-
-<div class="section">
-    <h2>Clinical Authority & Locations</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px;">
-        <div class="cred-item">
-            <strong>Pristine Heart Care Clinic</strong>
-            <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">Private Consultation & Advanced Diagnostics<br>Nagpur, Maharashtra</p>
-        </div>
-        <div class="cred-item">
-            <strong>Orbit Multispeciality Hospital</strong>
-            <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">Director & Senior Consultant<br>Tertiary Cardiac Care</p>
-        </div>
-        <div class="cred-item">
-            <strong>Academic Tenure</strong>
-            <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">Professor of Cardiology<br>Datta Meghe Institute (DMIHER)</p>
-        </div>
-    </div>
-</div>
-
-<div class="section" style="font-size:0.9rem; color: var(--text-light); background: #fafbfc;">
-    <h2 style="font-size: 1.2rem; color: var(--text-dark); border-bottom: 1px solid #eef2f5;">Medical Disclaimer</h2>
-    <p style="margin: 0; line-height: 1.6;">This platform provides expert cardiology second-opinion services based on the medical records submitted by the patient. This consultation does not replace emergency medical care, physical examination, or direct treating physician supervision. Patients experiencing urgent symptoms or medical emergencies should immediately contact their local healthcare provider or emergency services.</p>
-</div>
-
-<footer>
-    <div class="legal-links">
-        <a href="terms.html">Terms & Conditions</a> |
-        <a href="privacy.html">Privacy Policy</a> |
-        <a href="refund.html">Refund Policy</a>
-    </div>
-    <p style="margin-top: 25px; color: var(--text-dark);"><strong>Official Billing:</strong> Pristine Heart Care Clinic, Nagpur, India</p>
-    <p style="margin-top: 5px;"><strong>Email:</strong> consult@professoragrawal.com</p>
-    <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7;">© 2026 Professor Dr. Gajendra Agrawal. All Rights Reserved.</p>
-</footer>
-
-<a href="https://wa.me/917038928988" class="whatsapp-float" target="_blank">💬</a>
 
 <!-- ========================= -->
-<!-- PATIENT TESTIMONIALS SECTION -->
-<!-- Replace your OLD testimonial section completely with this -->
+<!-- CLINICAL AUTHORITY -->
 <!-- ========================= -->
 
 <div class="section">
 
-    <h2>Patient Experiences & Testimonials</h2>
+    <h2>
+        Clinical Authority & Locations
+    </h2>
 
-    <p style="color: var(--text-light); margin-bottom: 30px; font-size: 0.95rem;">
-        Feedback from patients who received online cardiology consultation and second-opinion guidance.
+    <div
+        style="
+            display:grid;
+            grid-template-columns:repeat(
+                auto-fit,
+                minmax(240px, 1fr)
+            );
+            gap:25px;
+        "
+    >
+
+        <div class="cred-item">
+
+            <strong>
+                Pristine Heart Care Clinic
+            </strong>
+
+            <p
+                style="
+                    font-size:0.9rem;
+                    color:var(--text-light);
+                    margin:0;
+                "
+            >
+                Private Consultation & Advanced Diagnostics
+                <br>
+                Nagpur, Maharashtra
+            </p>
+
+        </div>
+
+
+        <div class="cred-item">
+
+            <strong>
+                Orbit Multispeciality Hospital
+            </strong>
+
+            <p
+                style="
+                    font-size:0.9rem;
+                    color:var(--text-light);
+                    margin:0;
+                "
+            >
+                Director & Senior Consultant
+                <br>
+                Tertiary Cardiac Care
+            </p>
+
+        </div>
+
+
+        <div class="cred-item">
+
+            <strong>
+                Academic Tenure
+            </strong>
+
+            <p
+                style="
+                    font-size:0.9rem;
+                    color:var(--text-light);
+                    margin:0;
+                "
+            >
+                Professor of Cardiology
+                <br>
+                Datta Meghe Institute (DMIHER)
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- TESTIMONIALS -->
+<!-- ========================= -->
+
+<div class="section">
+
+    <h2>
+        Patient Experiences & Testimonials
+    </h2>
+
+    <p
+        style="
+            color:var(--text-light);
+            margin-bottom:30px;
+            font-size:0.95rem;
+        "
+    >
+        Feedback from patients who received online cardiology
+        consultation and second-opinion guidance.
     </p>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+    <div class="testimonial-grid">
 
-        <!-- Testimonial Card 1 -->
-        <div style="background:#fafbfc; border:1px solid #eef2f5; padding:25px; border-radius:14px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
 
-            <div style="color:#ffc107; font-size:1.1rem; margin-bottom:10px;">
+        <!-- TESTIMONIAL 1 -->
+
+        <div class="testimonial-card">
+
+            <div class="testimonial-stars">
                 ★★★★★
             </div>
 
-            <p style="font-style:italic; color:#2c3e50; line-height:1.6; margin-top:0;">
-                "Very clear explanation regarding angioplasty options and treatment planning."
+            <p class="testimonial-text">
+                "Very clear explanation regarding angioplasty
+                options and treatment planning."
             </p>
 
-            <strong style="display:block; margin-top:15px; color:var(--primary-dark);">
+            <strong class="testimonial-name">
                 Patient from Mumbai
             </strong>
 
         </div>
 
-        <!-- Testimonial Card 2 -->
-        <div style="background:#fafbfc; border:1px solid #eef2f5; padding:25px; border-radius:14px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
 
-            <div style="color:#ffc107; font-size:1.1rem; margin-bottom:10px;">
+        <!-- TESTIMONIAL 2 -->
+
+        <div class="testimonial-card">
+
+            <div class="testimonial-stars">
                 ★★★★★
             </div>
 
-            <p style="font-style:italic; color:#2c3e50; line-height:1.6; margin-top:0;">
-                "Professional online consultation with timely and reassuring guidance."
+            <p class="testimonial-text">
+                "Professional online consultation with timely
+                and reassuring guidance."
             </p>
 
-            <strong style="display:block; margin-top:15px; color:var(--primary-dark);">
+            <strong class="testimonial-name">
                 International Patient
             </strong>
 
         </div>
 
-        <!-- Testimonial Card 3 -->
-        <div style="background:#fafbfc; border:1px solid #eef2f5; padding:25px; border-radius:14px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
 
-            <div style="color:#ffc107; font-size:1.1rem; margin-bottom:10px;">
+        <!-- TESTIMONIAL 3 -->
+
+        <div class="testimonial-card">
+
+            <div class="testimonial-stars">
                 ★★★★★
             </div>
 
-            <p style="font-style:italic; color:#2c3e50; line-height:1.6; margin-top:0;">
-                "Detailed review of cardiac reports with excellent clarity regarding treatment options."
+            <p class="testimonial-text">
+                "Detailed review of cardiac reports with excellent
+                clarity regarding treatment options."
             </p>
 
-            <strong style="display:block; margin-top:15px; color:var(--primary-dark);">
+            <strong class="testimonial-name">
                 Patient from Nagpur
             </strong>
 
@@ -607,10 +968,119 @@ Pristine Heart Care Clinic
 
 </div>
 
+
 <!-- ========================= -->
-<!-- IMPORTANT -->
-<!-- DELETE ENTIRE OLD SCRIPT SECTION BELOW TESTIMONIALS -->
-<!-- DELETE from <script> till </script> -->
+<!-- MEDICAL DISCLAIMER -->
 <!-- ========================= -->
+
+<div
+    class="section"
+    style="
+        font-size:0.9rem;
+        color:var(--text-light);
+        background:#fafbfc;
+    "
+>
+
+    <h2
+        style="
+            font-size:1.2rem;
+            color:var(--text-dark);
+            border-bottom:1px solid #eef2f5;
+        "
+    >
+        Medical Disclaimer
+    </h2>
+
+    <p
+        style="
+            margin:0;
+            line-height:1.6;
+        "
+    >
+        This platform provides expert cardiology second-opinion
+        services based on the medical records submitted by the patient.
+        This consultation does not replace emergency medical care,
+        physical examination, or direct treating physician supervision.
+        Patients experiencing urgent symptoms or medical emergencies
+        should immediately contact their local healthcare provider
+        or emergency services.
+    </p>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+    <div class="legal-links">
+
+        <a href="terms.html">
+            Terms & Conditions
+        </a>
+
+        |
+
+        <a href="privacy.html">
+            Privacy Policy
+        </a>
+
+        |
+
+        <a href="refund.html">
+            Refund Policy
+        </a>
+
+    </div>
+
+    <p
+        style="
+            margin-top:25px;
+            color:var(--text-dark);
+        "
+    >
+        <strong>
+            Official Billing:
+        </strong>
+        Pristine Heart Care Clinic, Nagpur, India
+    </p>
+
+    <p style="margin-top:5px;">
+        <strong>Email:</strong>
+        consult@professoragrawal.com
+    </p>
+
+    <p
+        style="
+            margin-top:20px;
+            font-size:0.85rem;
+            opacity:0.7;
+        "
+    >
+        © 2026 Professor Dr. Gajendra Agrawal.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- ========================= -->
+<!-- WHATSAPP -->
+<!-- ========================= -->
+
+<a
+    href="https://wa.me/917038928988"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contact Pristine Heart Care Clinic on WhatsApp"
+>
+    💬
+</a>
+
+
 </body>
 </html>
