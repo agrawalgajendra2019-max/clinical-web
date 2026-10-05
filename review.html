@@ -24,17 +24,11 @@
         :root {
 
             --primary-color: #004a99;
-
             --primary-dark: #002d5f;
-
             --secondary-color: #28a745;
-
             --text-dark: #2c3e50;
-
             --text-light: #5a6c7d;
-
             --bg-global: #f4f7f9;
-
             --gold: #ffc107;
 
         }
@@ -292,8 +286,7 @@
 
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
 
             width: 100%;
 
@@ -320,8 +313,7 @@
 
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
 
             outline: none;
 
@@ -351,7 +343,7 @@
 
 
         /* ========================= */
-        /* RATING SELECTOR */
+        /* STAR RATING */
         /* ========================= */
 
         .star-rating {
@@ -445,6 +437,19 @@
 
             box-shadow:
                 0 8px 20px rgba(0,74,153,0.20);
+
+        }
+
+
+        .submit-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: wait;
+
+            transform: none;
+
+            box-shadow: none;
 
         }
 
@@ -720,7 +725,7 @@
 
 
 <!-- ========================= -->
-<!-- INTRODUCTION -->
+<!-- PATIENT FEEDBACK -->
 <!-- ========================= -->
 
 <div class="section">
@@ -728,6 +733,7 @@
     <h2>
         Patient Feedback
     </h2>
+
 
     <p class="intro">
 
@@ -741,7 +747,9 @@
     </p>
 
 
-    <!-- Rating display -->
+    <!-- ========================= -->
+    <!-- RATING DISPLAY -->
+    <!-- ========================= -->
 
     <div class="rating-box">
 
@@ -762,8 +770,7 @@
 
     <form
         id="reviewForm"
-        action="#"
-        method="post"
+        method="POST"
     >
 
 
@@ -783,6 +790,7 @@
                 id="patientName"
                 name="patientName"
                 placeholder="Enter your name"
+                autocomplete="name"
                 required
             >
 
@@ -806,6 +814,7 @@
                 id="location"
                 name="location"
                 placeholder="Example: Mumbai, India"
+                autocomplete="address-level2"
                 required
             >
 
@@ -835,8 +844,10 @@
                     required
                 >
 
-                <label for="star5"
-                       title="5 stars">
+                <label
+                    for="star5"
+                    title="5 stars"
+                >
                     ★
                 </label>
 
@@ -848,8 +859,10 @@
                     value="4"
                 >
 
-                <label for="star4"
-                       title="4 stars">
+                <label
+                    for="star4"
+                    title="4 stars"
+                >
                     ★
                 </label>
 
@@ -861,8 +874,10 @@
                     value="3"
                 >
 
-                <label for="star3"
-                       title="3 stars">
+                <label
+                    for="star3"
+                    title="3 stars"
+                >
                     ★
                 </label>
 
@@ -874,8 +889,10 @@
                     value="2"
                 >
 
-                <label for="star2"
-                       title="2 stars">
+                <label
+                    for="star2"
+                    title="2 stars"
+                >
                     ★
                 </label>
 
@@ -887,8 +904,10 @@
                     value="1"
                 >
 
-                <label for="star1"
-                       title="1 star">
+                <label
+                    for="star1"
+                    title="1 star"
+                >
                     ★
                 </label>
 
@@ -920,7 +939,7 @@
 
 
 
-        <!-- SUBMIT -->
+        <!-- SUBMIT BUTTON -->
 
         <button
             type="submit"
@@ -935,7 +954,9 @@
     </form>
 
 
-    <!-- PRIVACY -->
+    <!-- ========================= -->
+    <!-- PRIVACY NOTE -->
+    <!-- ========================= -->
 
     <div class="privacy-note">
 
@@ -952,7 +973,7 @@
 
 
 <!-- ========================= -->
-<!-- INFORMATION -->
+<!-- THANK YOU / INFORMATION -->
 <!-- ========================= -->
 
 <div class="section">
@@ -961,6 +982,7 @@
         Thank You for Your Feedback
     </h2>
 
+
     <p style="color: var(--text-light);">
 
         Patient feedback helps us understand how effectively we are
@@ -968,6 +990,7 @@
         second-opinion services.
 
     </p>
+
 
     <p style="color: var(--text-light);">
 
@@ -1020,15 +1043,20 @@
         <strong>
             Pristine Heart Care Clinic
         </strong>
+
         <br>
+
         Nagpur, Maharashtra, India
 
     </p>
 
 
     <p>
+
         <strong>Email:</strong>
+
         consult@professoragrawal.com
+
     </p>
 
 
@@ -1052,7 +1080,7 @@
     class="whatsapp-float"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Contact on WhatsApp"
+    aria-label="Contact Pristine Heart Care Clinic on WhatsApp"
 >
     💬
 </a>
@@ -1060,21 +1088,153 @@
 
 
 <!-- ========================= -->
-<!-- TEMPORARY FORM HANDLING -->
+<!-- GOOGLE SHEETS REVIEW SYSTEM -->
 <!-- ========================= -->
 
 <script>
 
-document.getElementById("reviewForm").addEventListener("submit", function(event) {
+const REVIEW_API_URL =
+"https://script.google.com/macros/s/AKfycbwqK926axq6b6xAOQugKGfiL-IneNGLTTb0Tj435W8a8qkyT6oMWa_PnG-R4yfzwN0k/exec";
 
-    event.preventDefault();
 
-    alert(
-        "Thank you for sharing your feedback. " +
-        "The review submission system will be activated shortly."
-    );
+document
+.getElementById("reviewForm")
+.addEventListener(
+    "submit",
+    async function(event) {
 
-});
+        event.preventDefault();
+
+
+        const form = event.target;
+
+
+        const submitButton =
+            form.querySelector(".submit-btn");
+
+
+        /*
+         * Check that a rating has been selected.
+         */
+
+        const selectedRating =
+            form.querySelector(
+                'input[name="rating"]:checked'
+            );
+
+
+        if (!selectedRating) {
+
+            alert(
+                "Please select a rating before submitting your review."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Disable button while submitting.
+         */
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Submitting Review...";
+
+
+        /*
+         * Collect form data.
+         */
+
+        const formData =
+            new FormData(form);
+
+
+        /*
+         * Send data to Google Apps Script.
+         *
+         * URLSearchParams converts the form
+         * into standard form data.
+         */
+
+        try {
+
+            await fetch(
+                REVIEW_API_URL,
+                {
+                    method: "POST",
+
+                    body:
+                        new URLSearchParams(formData),
+
+                    mode: "no-cors"
+                }
+            );
+
+
+            /*
+             * Because no-cors does not expose the
+             * server response to the browser, we
+             * treat completion of the request as
+             * submission.
+             */
+
+            form.reset();
+
+
+            submitButton.textContent =
+                "✓ Review Submitted";
+
+
+            alert(
+                "Thank you for sharing your feedback.\n\n" +
+                "Your review has been submitted successfully " +
+                "and will be reviewed before publication."
+            );
+
+
+            /*
+             * Restore button after 3 seconds.
+             */
+
+            setTimeout(
+                function() {
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "⭐ Submit Your Review";
+
+                },
+                3000
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Review submission error:",
+                error
+            );
+
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "⭐ Submit Your Review";
+
+
+            alert(
+                "We were unable to submit your review.\n\n" +
+                "Please try again or contact us on WhatsApp."
+            );
+
+        }
+
+    }
+);
 
 </script>
 
