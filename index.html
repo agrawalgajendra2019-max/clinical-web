@@ -1510,37 +1510,37 @@
      ========================= -->
 
 <script>
+/*
+====================================================
+LIVE APPROVED REVIEW SYSTEM
+Uses JSONP to avoid cross-origin fetch problems
+with Google Apps Script.
+====================================================
+*/
 
 const REVIEW_API_URL =
     "https://script.google.com/macros/s/AKfycbwqK926axq6b6xAOQugKGfiL-IneNGLTTb0Tj435W8a8qkyT6oMWa_PnG-R4yfzwN0k/exec";
 
 
 function escapeHTML(value) {
-
     return String(value || "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
 
 
 function createStars(rating) {
-
     const number =
         Math.max(
             0,
-            Math.min(
-                5,
-                Number(rating) || 0
-            )
+            Math.min(5, Number(rating) || 0)
         );
 
     return "★".repeat(number) +
            "☆".repeat(5 - number);
-
 }
 
 
@@ -1563,7 +1563,6 @@ function createReviewCard(review) {
             review.publishedDate || ""
         );
 
-
     return `
 
         <div class="review-card">
@@ -1575,13 +1574,11 @@ function createReviewCard(review) {
 
             </div>
 
-
             <p class="review-text">
 
                 "${reviewText}"
 
             </p>
-
 
             <span class="review-name">
 
@@ -1589,13 +1586,11 @@ function createReviewCard(review) {
 
             </span>
 
-
             <span class="review-location">
 
                 ${location}
 
             </span>
-
 
             ${
                 publishedDate
@@ -1615,126 +1610,34 @@ function createReviewCard(review) {
         </div>
 
     `;
-
 }
 
 
-async function loadApprovedReviews() {
+function displayApprovedReviews(data) {
 
     const reviewsGrid =
         document.getElementById(
             "live-reviews-grid"
         );
 
-
     if (!reviewsGrid) {
-
         return;
-
     }
 
+    if (
+        !data ||
+        data.success !== true
+    ) {
+        showReviewError();
+        return;
+    }
 
-    try {
+    const reviews =
+        Array.isArray(data.reviews)
+            ? data.reviews
+            : [];
 
-        const response =
-            await fetch(
-                REVIEW_API_URL,
-                {
-                    method: "GET",
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to retrieve reviews."
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        if (
-            !data ||
-            data.success !== true
-        ) {
-
-            throw new Error(
-                "Invalid review response."
-            );
-
-        }
-
-
-        const reviews =
-            Array.isArray(data.reviews)
-                ? data.reviews
-                : [];
-
-
-        /*
-        Only reviews returned by the
-        approved-review API are displayed.
-        */
-
-
-        if (reviews.length === 0) {
-
-            reviewsGrid.innerHTML = `
-
-                <div class="review-empty">
-
-                    <p style="
-                        margin:0 0 8px 0;
-                        font-weight:600;
-                        color:var(--primary-dark);
-                    ">
-                        Patient feedback will appear here.
-                    </p>
-
-                    <p style="
-                        margin:0;
-                        font-size:0.9rem;
-                    ">
-                        We welcome patients to share
-                        their experience after consultation.
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        reviewsGrid.innerHTML =
-            reviews
-                .map(
-                    createReviewCard
-                )
-                .join("");
-
-
-    } catch (error) {
-
-        console.error(
-            "Review loading error:",
-            error
-        );
-
-
-        /*
-        Do not display hard-coded reviews
-        if the live review system cannot be
-        reached.
-        */
+    if (reviews.length === 0) {
 
         reviewsGrid.innerHTML = `
 
@@ -1745,32 +1648,139 @@ async function loadApprovedReviews() {
                     font-weight:600;
                     color:var(--primary-dark);
                 ">
-                    Patient experiences
+                    Patient feedback will appear here.
                 </p>
 
                 <p style="
                     margin:0;
                     font-size:0.9rem;
                 ">
-                    Please visit our
-                    <a
-                        href="review.html"
-                        style="
-                            color:var(--primary-color);
-                            font-weight:600;
-                        "
-                    >
-                        patient review page
-                    </a>
-                    to share your experience.
+                    We welcome patients to share
+                    their experience after consultation.
                 </p>
 
             </div>
 
         `;
 
+        return;
     }
 
+    reviewsGrid.innerHTML =
+        reviews
+            .map(createReviewCard)
+            .join("");
+}
+
+
+function showReviewError() {
+
+    const reviewsGrid =
+        document.getElementById(
+            "live-reviews-grid"
+        );
+
+    if (!reviewsGrid) {
+        return;
+    }
+
+    reviewsGrid.innerHTML = `
+
+        <div class="review-empty">
+
+            <p style="
+                margin:0 0 8px 0;
+                font-weight:600;
+                color:var(--primary-dark);
+            ">
+                Patient experiences
+            </p>
+
+            <p style="
+                margin:0;
+                font-size:0.9rem;
+            ">
+                Please visit our
+                <a
+                    href="review.html"
+                    style="
+                        color:var(--primary-color);
+                        font-weight:600;
+                    "
+                >
+                    patient review page
+                </a>
+                to share your experience.
+            </p>
+
+        </div>
+
+    `;
+}
+
+
+function loadApprovedReviews() {
+
+    const callbackName =
+        "receiveApprovedReviews_" +
+        Date.now();
+
+    let scriptTag =
+        document.createElement("script");
+
+    window[callbackName] =
+        function(data) {
+
+            try {
+                displayApprovedReviews(data);
+            } finally {
+
+                delete window[callbackName];
+
+                if (
+                    scriptTag &&
+                    scriptTag.parentNode
+                ) {
+
+                    scriptTag.parentNode.removeChild(
+                        scriptTag
+                    );
+
+                }
+            }
+        };
+
+    scriptTag.src =
+        REVIEW_API_URL +
+        "?callback=" +
+        encodeURIComponent(callbackName) +
+        "&t=" +
+        Date.now();
+
+    scriptTag.async = true;
+
+    scriptTag.onerror =
+        function() {
+
+            delete window[callbackName];
+
+            if (
+                scriptTag &&
+                scriptTag.parentNode
+            ) {
+
+                scriptTag.parentNode.removeChild(
+                    scriptTag
+                );
+
+            }
+
+            showReviewError();
+        };
+
+    document
+        .head
+        .appendChild(scriptTag);
 }
 
 
