@@ -1510,37 +1510,37 @@
      ========================= -->
 
 <script>
-/*
-====================================================
-LIVE APPROVED REVIEW SYSTEM
-Uses JSONP to avoid cross-origin fetch problems
-with Google Apps Script.
-====================================================
-*/
 
 const REVIEW_API_URL =
     "https://script.google.com/macros/s/AKfycbwqK926axq6b6xAOQugKGfiL-IneNGLTTb0Tj435W8a8qkyT6oMWa_PnG-R4yfzwN0k/exec";
 
 
 function escapeHTML(value) {
+
     return String(value || "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
 }
 
 
 function createStars(rating) {
+
     const number =
         Math.max(
             0,
-            Math.min(5, Number(rating) || 0)
+            Math.min(
+                5,
+                Number(rating) || 0
+            )
         );
 
     return "★".repeat(number) +
            "☆".repeat(5 - number);
+
 }
 
 
@@ -1563,6 +1563,7 @@ function createReviewCard(review) {
             review.publishedDate || ""
         );
 
+
     return `
 
         <div class="review-card">
@@ -1574,11 +1575,13 @@ function createReviewCard(review) {
 
             </div>
 
+
             <p class="review-text">
 
                 "${reviewText}"
 
             </p>
+
 
             <span class="review-name">
 
@@ -1586,11 +1589,13 @@ function createReviewCard(review) {
 
             </span>
 
+
             <span class="review-location">
 
                 ${location}
 
             </span>
+
 
             ${
                 publishedDate
@@ -1610,6 +1615,7 @@ function createReviewCard(review) {
         </div>
 
     `;
+
 }
 
 
@@ -1628,7 +1634,11 @@ function displayApprovedReviews(data) {
         !data ||
         data.success !== true
     ) {
-        showReviewError();
+
+        showReviewError(
+            "Unable to retrieve patient feedback."
+        );
+
         return;
     }
 
@@ -1636,6 +1646,11 @@ function displayApprovedReviews(data) {
         Array.isArray(data.reviews)
             ? data.reviews
             : [];
+
+    /*
+    ONLY APPROVED REVIEWS RETURNED
+    BY THE GOOGLE APPS SCRIPT ARE DISPLAYED.
+    */
 
     if (reviews.length === 0) {
 
@@ -1670,10 +1685,11 @@ function displayApprovedReviews(data) {
         reviews
             .map(createReviewCard)
             .join("");
+
 }
 
 
-function showReviewError() {
+function showReviewError(message) {
 
     const reviewsGrid =
         document.getElementById(
@@ -1700,6 +1716,13 @@ function showReviewError() {
                 margin:0;
                 font-size:0.9rem;
             ">
+                ${escapeHTML(message)}
+            </p>
+
+            <p style="
+                margin:12px 0 0 0;
+                font-size:0.9rem;
+            ">
                 Please visit our
                 <a
                     href="review.html"
@@ -1716,71 +1739,152 @@ function showReviewError() {
         </div>
 
     `;
+
 }
 
 
 function loadApprovedReviews() {
 
+    const reviewsGrid =
+        document.getElementById(
+            "live-reviews-grid"
+        );
+
+    if (!reviewsGrid) {
+        return;
+    }
+
+    /*
+    Create a unique JSONP callback.
+    This avoids the cross-origin fetch problem
+    encountered with Google Apps Script.
+    */
+
     const callbackName =
         "receiveApprovedReviews_" +
         Date.now();
 
-    let scriptTag =
+    let completed = false;
+
+    const script =
         document.createElement("script");
+
+    const cleanup = function() {
+
+        if (script.parentNode) {
+            script.parentNode.removeChild(script);
+        }
+
+        try {
+            delete window[callbackName];
+        } catch (error) {
+            window[callbackName] = undefined;
+        }
+
+    };
+
+    const timeoutId =
+        window.setTimeout(
+            function() {
+
+                if (completed) {
+                    return;
+                }
+
+                completed = true;
+
+                cleanup();
+
+                console.error(
+                    "Review API timeout."
+                );
+
+                showReviewError(
+                    "Patient feedback is temporarily unavailable."
+                );
+
+            },
+            15000
+        );
 
     window[callbackName] =
         function(data) {
 
+            if (completed) {
+                return;
+            }
+
+            completed = true;
+
+            window.clearTimeout(
+                timeoutId
+            );
+
             try {
-                displayApprovedReviews(data);
+
+                displayApprovedReviews(
+                    data
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Review display error:",
+                    error
+                );
+
+                showReviewError(
+                    "Unable to display patient feedback."
+                );
+
             } finally {
 
-                delete window[callbackName];
+                cleanup();
 
-                if (
-                    scriptTag &&
-                    scriptTag.parentNode
-                ) {
-
-                    scriptTag.parentNode.removeChild(
-                        scriptTag
-                    );
-
-                }
             }
+
         };
 
-    scriptTag.src =
+    script.src =
         REVIEW_API_URL +
         "?callback=" +
-        encodeURIComponent(callbackName) +
+        encodeURIComponent(
+            callbackName
+        ) +
         "&t=" +
         Date.now();
 
-    scriptTag.async = true;
+    script.async = true;
 
-    scriptTag.onerror =
+    script.onerror =
         function() {
 
-            delete window[callbackName];
-
-            if (
-                scriptTag &&
-                scriptTag.parentNode
-            ) {
-
-                scriptTag.parentNode.removeChild(
-                    scriptTag
-                );
-
+            if (completed) {
+                return;
             }
 
-            showReviewError();
+            completed = true;
+
+            window.clearTimeout(
+                timeoutId
+            );
+
+            cleanup();
+
+            console.error(
+                "Review API script failed."
+            );
+
+            showReviewError(
+                "Patient feedback is temporarily unavailable."
+            );
+
         };
 
-    document
-        .head
-        .appendChild(scriptTag);
+    document.body.appendChild(
+        script
+    );
+
 }
 
 
